@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>种子质量监管系统</title>
+    <script>
+        // GitHub Pages 404 路由重定向
+        (function() {
+            var path = window.location.pathname;
+            var basePath = '/huangjie.github.io';
+            var hasBasePath = path.indexOf(basePath) === 0;
+            var relativePath = hasBasePath ? path.substring(basePath.length) : path;
+            
+            // 移除查询参数和哈希
+            var cleanPath = relativePath.split('?')[0].split('#')[0];
+            
+            // 如果路径为空，直接重定向到首页
+            if (cleanPath === '/' || cleanPath === '') {
+                window.location.replace(basePath + '/');
+                return;
+            }
+            
+            // 尝试重定向到带 .html 的路径
+            if (!cleanPath.endsWith('.html')) {
+                var targetPath = cleanPath + '.html';
+                var fullPath = basePath + targetPath;
+                
+                // 先尝试直接访问
+                var xhr = new XMLHttpRequest();
+                xhr.open('HEAD', fullPath, false);
+                try {
+                    xhr.send();
+                    if (xhr.status === 200 || xhr.status === 304) {
+                        window.location.replace(fullPath);
+                        return;
+                    }
+                } catch(e) {
+                    // 请求失败，继续尝试其他方法
+                }
+            }
+            
+            // 如果都不行，重定向到首页
+            window.location.replace(basePath + '/');
+        })();
+    </script>
+</head>
+<body>
+    <h1>页面加载中...</h1>
+    <p>如果没有自动跳转，请<a href="/huangjie.github.io/">点击这里</a>返回首页。</p>
+</body>
+</html>
